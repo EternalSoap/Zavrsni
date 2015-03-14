@@ -8,24 +8,26 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Izvor implements Element{
+public class Ampermetar implements Element {
 	
+	String struja;
 	Point a,b;
 	Boolean inverted;
-	private String imageName = "Izvor.png";
-	transient BufferedImage slika;
 	Boolean paint;
-	String napon;
+	transient BufferedImage slika;
+	private String imageName = "Ampermetar.png";
 	
-	public Izvor(String n){
-		inverted = false;
+	public Ampermetar(){
+		a=b=null;
 		paint = false;
-		napon = n;
-	};
-
+		inverted = false;
+		struja ="0";
+		
+	}
 	@Override
 	public void updateXY(int x, int y) {
-		if(x>1050) x-=50;
+		//System.out.println(y);
+		if(x>800) x-=50;
 		if(y>625) y-=50;
 		if(a==null){a = new Point(x,y); return;}
 		else if(b==null){b = new Point(x,y);}
@@ -61,18 +63,19 @@ public class Izvor implements Element{
 
 	@Override
 	public String getValue() {
-		return this.napon;
+		return struja;
+	
 	}
 
 	@Override
 	public void updateValue(String value) {
-		this.napon = value;
+		this.struja = value;
 		
 	}
 
 	@Override
 	public boolean getRotation() {
-		return !this.inverted;
+		return this.inverted;
 	}
 
 	@Override
@@ -83,6 +86,7 @@ public class Izvor implements Element{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }

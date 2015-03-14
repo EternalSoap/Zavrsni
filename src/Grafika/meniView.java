@@ -21,9 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Elementi.Ampermetar;
 import Elementi.Izvor;
 import Elementi.Linija;
 import Elementi.Otpornik;
+import Elementi.Voltmetar;
 
 
 public class meniView extends JPanel implements ActionListener {
@@ -31,11 +33,11 @@ public class meniView extends JPanel implements ActionListener {
 	public meniView(){
 		setMaximumSize(new Dimension(300,768));
 		setBorder(new EmptyBorder(25,25,450,25));
-		setLayout(new GridLayout(10,1,10,10));
-		Dimension maxSize = new Dimension(100,30);
+		setLayout(new GridLayout(10,1,40,5));
+		Dimension maxSize = new Dimension(100,40);
 		
 		String [] listaPrimjera = {"Ohmov zakon - Primjer 1", "Ohmov zakon - Primjer 2", "Ohmov zakon - Primjer 3", "Prvi Kirchhoffov zakon - Primjer 1","Prvi Kirchhoffov zakon - Primjer 2","Prvi Kirchhoffov zakon - Primjer 3","Drugi Kirchhoffov zakon - Primjer 1","Drugi Kirchhoffov zakon - Primjer 2","Drugi Kirchhoffov zakon - Primjer 3"};  
-		primjeri = new JComboBox(listaPrimjera);
+		primjeri = new JComboBox<String>(listaPrimjera);
 		primjeri.setSelectedIndex(0);
 		primjeri.addActionListener(this);
 		JButton izv = new JButton("Izvor");
@@ -84,12 +86,12 @@ public class meniView extends JPanel implements ActionListener {
 		
 		amp.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
-				
+				addAmp();
 			}
 		});
 		vol.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
-				
+				addVolt();
 			}
 		});
 		vod.addMouseListener(new MouseAdapter(){
@@ -116,6 +118,20 @@ public class meniView extends JPanel implements ActionListener {
 	
 
 
+	protected void addVolt() {
+		appView.dodajEl(new Voltmetar());
+		
+	}
+
+
+
+	protected void addAmp() {
+		appView.dodajEl(new Ampermetar());
+		
+	}
+
+
+
 	protected void addIzvor() {
 		appView.dodajEl(new Izvor(new unos("0","napon").returnVoltage()));
 		
@@ -136,7 +152,7 @@ public class meniView extends JPanel implements ActionListener {
 	}
 
 
-	public Dimension getPreferredSize(){return new Dimension(300,768);}
+	public Dimension getPreferredSize(){return new Dimension(300,700);}
 
 
 

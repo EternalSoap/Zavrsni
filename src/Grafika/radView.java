@@ -58,7 +58,7 @@ public class radView extends JPanel{
 
 
 	public Dimension getPreferredSize(){
-		return new Dimension(1024,768);
+		return new Dimension(875,600);
 		
 	}
 	
@@ -83,10 +83,10 @@ public class radView extends JPanel{
 						
 						AffineTransform r = AffineTransform.getRotateInstance(Math.toRadians(90), p.getImage().getWidth()/2, p.getImage().getHeight()/2);
 						AffineTransformOp atop = new AffineTransformOp(r,AffineTransformOp.TYPE_BILINEAR);
-						g2d.drawImage(atop.filter(p.getImage(), null),(int)p.getShape().getBounds2D().getX()-25,(int)p.getShape().getBounds2D().getY(),null);
+						g2d.drawImage(atop.filter(p.getImage(), null),(int)p.getShape().getBounds2D().getX()-25,(int)p.getShape().getBounds2D().getY()-25,null);
 					}
 					else{
-						g2d.drawImage(p.getImage(),(int)p.getShape().getBounds2D().getX()-25,(int)p.getShape().getBounds2D().getY(),null);
+						g2d.drawImage(p.getImage(),(int)p.getShape().getBounds2D().getX()-25,(int)p.getShape().getBounds2D().getY()-25,null);
 						
 					}
 		}

@@ -18,6 +18,7 @@ public class Otpornik implements Element{
 	boolean inverted;
 	
 	public Otpornik(String o){
+		a=b=null;
 		inverted = false;
 		paint = false;
 		otpor = o;
@@ -25,7 +26,7 @@ public class Otpornik implements Element{
 
 	@Override
 	public void updateXY(int x, int y) {
-		if(x>1050) x-=50;
+		if(x>1000) x-=50;
 		if(y>625) y-=50;
 		if(a==null){a = new Point(x,y); return;}
 		else if(b==null){b = new Point(x,y);}
@@ -45,7 +46,7 @@ public class Otpornik implements Element{
 
 	@Override
 	public Shape getShape() {
-		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-50+100/2)/100)*100+25, 100,100);
+		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-75+100/2)/100)*100+50, 100,100);
 	}
 
 	@Override
