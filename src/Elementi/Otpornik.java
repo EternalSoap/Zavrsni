@@ -26,7 +26,7 @@ public class Otpornik implements Element{
 
 	@Override
 	public void updateXY(int x, int y) {
-		if(x>1000) x-=50;
+		if(x>800) x-=50;
 		if(y>625) y-=50;
 		if(a==null){a = new Point(x,y); return;}
 		else if(b==null){b = new Point(x,y);}

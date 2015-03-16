@@ -5,23 +5,19 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 
-public class Linija implements Element {
+public class Tgore implements Element {
 	
+	Point a,b;
+	Boolean paint,inverted;
 	transient BufferedImage slika;
-	Boolean paint;
-	Point a = null;
-	Point b = null;
-	Boolean inverted = false;
-	String imageName="vod.png";
+	private String imageName = "Tgore.png";
 	
-	public Linija(Point p1,Point p2){
-		paint = false;
+	public Tgore(){
+		a=b=null;
+		paint = inverted = false;
 	}
 
 	@Override
@@ -45,18 +41,18 @@ public class Linija implements Element {
 	}
 
 	@Override
-	public Shape getShape() {
-		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-50+50/2)/100)*100+25, 50, 25);
+	public BufferedImage getImage() {
+		return this.slika;
 	}
 
 	@Override
-	public BufferedImage getImage() {
-		return slika;
+	public Shape getShape() {
+		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-75+100/2)/100)*100+50, 100,100);
 	}
 
 	@Override
 	public Boolean ready() {
-		return paint;
+		return this.paint;
 	}
 
 	@Override
@@ -65,10 +61,20 @@ public class Linija implements Element {
 		return false;
 	}
 
-
 	@Override
 	public String getValue() {
 		return null;
+	}
+
+	@Override
+	public void updateValue(String value) {
+		//nope
+		
+	}
+
+	@Override
+	public boolean getRotation() {
+		return this.inverted;
 	}
 
 	@Override
@@ -82,17 +88,4 @@ public class Linija implements Element {
 		
 	}
 
-	@Override
-	public boolean getRotation() {
-		return this.inverted;
-	}
-
-
-	@Override
-	public void updateValue(String value) {
-		//nope
-		
-	}
-
-	
 }
