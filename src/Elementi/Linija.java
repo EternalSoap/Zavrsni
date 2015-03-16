@@ -46,7 +46,7 @@ public class Linija implements Element {
 
 	@Override
 	public Shape getShape() {
-		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-50+50/2)/100)*100+25, 50, 25);
+		return new Rectangle2D.Float(((a.x-75+100/2)/100)*100+50, ((a.y-75+100/2)/100)*100+50, 100, 100);
 	}
 
 	@Override
