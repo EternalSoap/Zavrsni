@@ -39,6 +39,7 @@ import Elementi.Voltmetar;
 public class meniView extends JPanel implements ActionListener {
 	JComboBox primjeri;
 	public meniView(){
+		
 		setMaximumSize(new Dimension(300,600));
 		setBorder(new EmptyBorder(25,25,25,25));
 		setLayout(new GridLayout(20,1,40,5));

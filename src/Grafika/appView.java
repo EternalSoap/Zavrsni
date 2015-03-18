@@ -40,6 +40,7 @@ public class appView extends JPanel implements Serializable{
 	protected static void Init() {
 		JFrame j = new JFrame("Zavrsni rad");
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		j.setResizable(false);
 		//j.setExtendedState(j.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		JPanel container = new JPanel();
 		meniView view1 = new meniView();
