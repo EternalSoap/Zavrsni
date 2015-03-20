@@ -28,7 +28,7 @@ public class Ampermetar implements Element {
 	public void updateXY(int x, int y) {
 		System.out.println(y);
 		if(x>800) x-=50;
-		if(y>625) y-=100;
+		if(y>=725) y-=100;
 		if(a==null){a = new Point(x,y); return;}
 		else if(b==null){b = new Point(x,y);}
 		if(Math.abs(a.x-b.x)>50) inverted = false;

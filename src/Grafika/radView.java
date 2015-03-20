@@ -58,7 +58,7 @@ public class radView extends JPanel{
 
 
 	public Dimension getPreferredSize(){
-		return new Dimension(875,600);
+		return new Dimension(875,800);
 		
 	}
 	

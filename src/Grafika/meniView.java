@@ -40,7 +40,7 @@ public class meniView extends JPanel implements ActionListener {
 	JComboBox primjeri;
 	public meniView(){
 		
-		setMaximumSize(new Dimension(300,600));
+		this.setMaximumSize(getPreferredSize());
 		setBorder(new EmptyBorder(25,25,25,25));
 		setLayout(new GridLayout(20,1,40,5));
 		Dimension maxSize = new Dimension(100,40);
@@ -91,7 +91,7 @@ public class meniView extends JPanel implements ActionListener {
 		Tlijevo.setMaximumSize(maxSize);
 		Tgore.setMaximumSize(maxSize);
 		Tdolje.setMaximumSize(maxSize);
-		primjeri.setMaximumSize(new Dimension(200,30));
+		primjeri.setMaximumSize(maxSize);
 		
 		load.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
@@ -188,11 +188,13 @@ public class meniView extends JPanel implements ActionListener {
 				
 			}
 		});
-		
+		add(primjeri);
+		add(save);
+		add(load);
 		add(izv);
-		add(amp);
-		add(vol);
 		add(vod);
+		add(vol);
+		add(amp);
 		add(desno_gore);
 		add(dolje_desno);
 		add(lijevo_dolje);
@@ -201,10 +203,9 @@ public class meniView extends JPanel implements ActionListener {
 		add(Tdolje);
 		add(Tlijevo);
 		add(Tdesno);
-		add(save);
-		add(load);
 		
-		add(primjeri);
+		
+		
 	}
 	
 
@@ -299,12 +300,13 @@ public class meniView extends JPanel implements ActionListener {
 	}
 
 
-	public Dimension getPreferredSize(){return new Dimension(300,700);}
+	public Dimension getPreferredSize(){return new Dimension(300,800);}
 
 
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		appView.changeLayout();
 		appView.loadList(primjeri.getSelectedIndex());
 		repaint();
 		

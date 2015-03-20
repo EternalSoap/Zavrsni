@@ -1,6 +1,7 @@
 package Grafika;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,8 @@ import Elementi.Otpornik;
 
 public class appView extends JPanel implements Serializable{
 	static ArrayList<Element> l = new ArrayList<Element>();
+	static JFrame j = new JFrame("Simulacija Strujnog Kruga");
+	static JPanel container = new JPanel();
 	public static void main(String[] args){
 		
 		SwingUtilities.invokeLater(new Runnable(){
@@ -38,19 +41,20 @@ public class appView extends JPanel implements Serializable{
 	}
 
 	protected static void Init() {
-		JFrame j = new JFrame("Zavrsni rad");
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setResizable(false);
 		//j.setExtendedState(j.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		JPanel container = new JPanel();
 		meniView view1 = new meniView();
-		radView view2 = new radView();
+		//radView view2 = new radView();
+		splashScreen view2 = new splashScreen();
 		container.setLayout(new BoxLayout(container,BoxLayout.X_AXIS));
 		container.add(view1);
 		container.add(view2);
 		j.getContentPane().add(container, BorderLayout.NORTH);
 		j.pack();
+		j.setSize(1200, 800);
 		j.setVisible(true);
+		
 		
 	}
 	
@@ -110,7 +114,16 @@ public class appView extends JPanel implements Serializable{
 		
 	}
 	
-	
+	public static void changeLayout(){
+		j.getContentPane().remove(container);
+		JPanel container = new JPanel();
+		meniView v1 = new meniView();
+		radView v2 = new radView();
+		container.add(v1);
+		container.add(v2);
+		j.getContentPane().add(container, BorderLayout.NORTH);
+		j.revalidate();
+	}
 	
 }
 
