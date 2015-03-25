@@ -74,7 +74,7 @@ public class Desno_gore implements Element {
 
 	@Override
 	public boolean getRotation() {
-		return this.inverted;
+		return false;
 	}
 
 	@Override

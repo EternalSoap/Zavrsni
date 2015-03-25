@@ -74,7 +74,7 @@ public class Lijevo_dolje implements Element {
 
 	@Override
 	public boolean getRotation() {
-		return this.inverted;
+		return false;
 	}
 
 	@Override

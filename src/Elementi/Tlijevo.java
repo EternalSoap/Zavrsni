@@ -74,7 +74,7 @@ public class Tlijevo implements Element {
 
 	@Override
 	public boolean getRotation() {
-		return this.inverted;
+		return false;
 	}
 
 	@Override
