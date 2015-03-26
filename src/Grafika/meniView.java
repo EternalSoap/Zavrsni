@@ -63,6 +63,7 @@ public class meniView extends JPanel implements ActionListener {
 		JButton Tlijevo = new JButton("Vod T-lijevo");
 		JButton Tgore = new JButton("Vod T-gore");
 		JButton Tdolje = new JButton("Vod T-dolje");
+		JButton delete = new JButton("Obrisi");
 		
 		
 		
@@ -92,6 +93,7 @@ public class meniView extends JPanel implements ActionListener {
 		Tgore.setMaximumSize(maxSize);
 		Tdolje.setMaximumSize(maxSize);
 		primjeri.setMaximumSize(maxSize);
+		delete.setMaximumSize(maxSize);
 		
 		load.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
@@ -188,6 +190,14 @@ public class meniView extends JPanel implements ActionListener {
 				
 			}
 		});
+		
+		delete.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				delete();
+				
+			}
+		});
+		
 		add(primjeri);
 		add(save);
 		add(load);
@@ -203,11 +213,20 @@ public class meniView extends JPanel implements ActionListener {
 		add(Tdolje);
 		add(Tlijevo);
 		add(Tdesno);
+		add(delete);
 		
 		
 		
 	}
 	
+
+
+	protected void delete() {
+		if(!appView.l.isEmpty())
+		appView.del = true;
+		
+	}
+
 
 
 	protected void addTdolje() {

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -15,7 +16,7 @@ public class Ampermetar implements Element {
 	Boolean inverted;
 	Boolean paint;
 	transient BufferedImage slika;
-	private String imageName = "Ampermetar.png";
+	private String imageName = "ampermetar.png";
 	
 	public Ampermetar(){
 		a=b=null;
@@ -34,7 +35,7 @@ public class Ampermetar implements Element {
 		if(Math.abs(a.x-b.x)>50) inverted = false;
 		else if(Math.abs(a.y-b.y)>50) inverted = true;
 		try{
-		slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+		slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 		} catch(IOException e){e.printStackTrace();}
 		paint = true;
 		
@@ -81,7 +82,7 @@ public class Ampermetar implements Element {
 	@Override
 	public void refresh() {
 		try {
-			slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+			slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 			System.out.println(slika);
 		} catch (IOException e) {
 			e.printStackTrace();

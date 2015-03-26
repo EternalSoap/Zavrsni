@@ -15,7 +15,7 @@ public class Voltmetar implements Element {
 	Boolean paint;
 	Boolean inverted;
 	transient BufferedImage slika;
-	private String imageName = "Voltmetar.png";
+	private String imageName = "voltmetar.png";
 	
 	public Voltmetar(){
 		a=b=null;
@@ -33,7 +33,7 @@ public class Voltmetar implements Element {
 		if(Math.abs(a.x-b.x)>50) inverted = false;
 		else if(Math.abs(a.y-b.y)>50) inverted = true;
 		try{
-		slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+		slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 		} catch(IOException e){e.printStackTrace();}
 		paint = true;
 		
@@ -80,7 +80,7 @@ public class Voltmetar implements Element {
 	@Override
 	public void refresh() {
 		try {
-			slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+			slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 			System.out.println(slika);
 		} catch (IOException e) {
 			e.printStackTrace();

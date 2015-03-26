@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -37,11 +39,13 @@ public class radView extends JPanel{
 		    public void run() {
 		        while (true) {
 		            repaint();
+		            spojeno();
 		            try {
 		                Thread.sleep(30);
 		            } catch (InterruptedException ignored) {
 		            }
 		        }
+		        
 		    }
 		});
 		repainter.setName("Panel repaint");
@@ -52,6 +56,7 @@ public class radView extends JPanel{
 
 	private void addCoord(Point point) {
 		System.out.println((point.x-25)/100+" "+(point.y-25)/100);
+		if(appView.del){appView.deleteEl(point); return;} 
 		appView.dodajXY(point.x, point.y);
 		
 	}
@@ -95,4 +100,33 @@ public class radView extends JPanel{
 		
 		 
 	}
+	public Boolean spojeno(){
+		Boolean s = true;
+		int i,j,izvorx,izvory;
+		i=j=izvorx=izvory=0;
+		Element[][] polje = new Element[8][7];
+		
+		for(Element e : appView.l){
+			if(e.ready()){
+			i = (int) ((e.getShape().getBounds2D().getX()-25)/100);
+			j = (int) ((e.getShape().getBounds2D().getY()-25)/100);
+			if(e instanceof Elementi.Izvor ){izvorx = i; izvory = j; }
+			polje[i][j] = e;
+			}
+			}
+		provjera p = new provjera(izvorx,izvory,polje);
+		
+		
+		
+		
+			
+			
+		
+				
+				
+		return s;
+		
+	}
+	
+	
 }

@@ -33,7 +33,7 @@ public class Otpornik implements Element{
 		if(Math.abs(a.x-b.x)>50) inverted = false;
 		else if(Math.abs(a.y-b.y)>50) inverted = true;
 		try{
-		slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+		slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 		} catch(IOException e){e.printStackTrace();}
 		paint = true;
 		
@@ -64,7 +64,7 @@ public class Otpornik implements Element{
 
 	public void refresh() {
 		try {
-			slika = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageName));
+			slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
 			System.out.println(slika);
 		} catch (IOException e) {
 			e.printStackTrace();

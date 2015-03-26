@@ -1,16 +1,14 @@
 package Grafika;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -18,12 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import Elementi.Element;
-import Elementi.Otpornik;
 
 public class appView extends JPanel implements Serializable{
-	static ArrayList<Element> l = new ArrayList<Element>();
+	static CopyOnWriteArrayList<Element> l = new CopyOnWriteArrayList<Element>();
 	static JFrame j = new JFrame("Simulacija Strujnog Kruga");
 	static JPanel container = new JPanel();
+	static Boolean del;
 	public static void main(String[] args){
 		
 		SwingUtilities.invokeLater(new Runnable(){
@@ -54,7 +52,7 @@ public class appView extends JPanel implements Serializable{
 		j.pack();
 		j.setSize(1200, 800);
 		j.setVisible(true);
-		
+		del = false;
 		
 	}
 	
@@ -86,6 +84,7 @@ public class appView extends JPanel implements Serializable{
 		}catch(IOException e){ e.printStackTrace();}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void loadList(int index) {
 		String ime = "data"+index+".obj";
 		System.out.println(index);
@@ -93,10 +92,10 @@ public class appView extends JPanel implements Serializable{
 			FileInputStream file = new FileInputStream(ime);
 			System.out.println(file.getChannel().size());
 			long duljina = file.getChannel().size();
-			if(duljina == 0) return;
+			if(duljina == 0){file.close(); return;}
 			ObjectInputStream ois = new ObjectInputStream(file);
 			
-			l = (ArrayList<Element>) ois.readObject();
+			l =(CopyOnWriteArrayList<Element>) ois.readObject();
 			refresh(l);
 			ois.close();
 			file.close();
@@ -106,7 +105,7 @@ public class appView extends JPanel implements Serializable{
 		
 	}
 
-	private static void refresh(ArrayList<Element> l2) {
+	private static void refresh(CopyOnWriteArrayList<Element> l2) {
 		for(Element i : l2){
 			i.refresh();
 			
@@ -123,6 +122,14 @@ public class appView extends JPanel implements Serializable{
 		container.add(v2);
 		j.getContentPane().add(container, BorderLayout.NORTH);
 		j.revalidate();
+	}
+
+	public static void deleteEl(Point point) {
+		for(Element e : l){
+			if(e.ima(point)) {l.remove(e);}
+		}
+		del = false;
+		
 	}
 	
 }
