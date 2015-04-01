@@ -7,9 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -114,10 +116,24 @@ public class radView extends JPanel{
 			polje[i][j] = e;
 			}
 			}
-		provjera p = new provjera(izvorx,izvory,polje);
-		
-		
-		
+		int counter =0;
+		int broj = appView.l.size();
+		for(int prvi =1; prvi<broj; prvi++){
+			for(int drugi = 0; drugi<broj; drugi++){
+				Element e1 = appView.l.get(prvi);
+				Element e2 = appView.l.get(drugi);
+				if(e1.ready() && e2.ready()) {
+					
+					int w = e2.getRotation()?0:110;
+					int h = e2.getRotation()?110:0;
+					if(e1.getShape().getBounds2D().contains(new Point((int) e2.getShape().getBounds2D().getX()+w,(int)e2.getShape().getBounds2D().getY()+h))){
+						System.out.println(prvi+" "+ drugi); counter++;}
+					//else System.out.println("Ne");
+				}	
+			}
+			if(counter!=broj/2) System.out.println("Krivo spojeno");
+			
+		}
 		
 			
 			

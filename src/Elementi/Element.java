@@ -28,5 +28,6 @@ public interface Element extends Serializable{
 	boolean getRotation();
 
 	void refresh();
+
 	
 }
