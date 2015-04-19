@@ -16,7 +16,7 @@ public class Ampermetar implements Element {
 	Boolean inverted;
 	Boolean paint;
 	transient BufferedImage slika;
-	private String imageName = "ampermetar.png";
+	private String imageName = "Ampermetar.png";
 	
 	public Ampermetar(){
 		a=b=null;

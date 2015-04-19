@@ -15,7 +15,7 @@ public class Voltmetar implements Element {
 	Boolean paint;
 	Boolean inverted;
 	transient BufferedImage slika;
-	private String imageName = "voltmetar.png";
+	private String imageName = "Voltmetar.png";
 	
 	public Voltmetar(){
 		a=b=null;
