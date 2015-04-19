@@ -37,7 +37,23 @@ import Elementi.Voltmetar;
 
 
 public class meniView extends JPanel implements ActionListener {
-	JComboBox primjeri;
+	JComboBox<String> primjeri;
+	JButton temp;
+	JButton izv;
+	JButton amp;
+	JButton vol;
+	JButton vod;
+	JButton save;
+	JButton load;
+	JButton desno_gore ;
+	JButton dolje_desno;
+	JButton lijevo_dolje;
+	JButton lijevo_gore;
+	JButton Tdesno;
+	JButton Tlijevo;
+	JButton Tgore;
+	JButton Tdolje;
+	JButton delete;
 	public meniView(){
 		
 		this.setMaximumSize(getPreferredSize());
@@ -45,37 +61,37 @@ public class meniView extends JPanel implements ActionListener {
 		setLayout(new GridLayout(20,1,40,5));
 		Dimension maxSize = new Dimension(100,40);
 		
-		String [] listaPrimjera = {"Ohmov zakon - Primjer 1", "Ohmov zakon - Primjer 2", "Ohmov zakon - Primjer 3", "Prvi Kirchhoffov zakon - Primjer 1","Prvi Kirchhoffov zakon - Primjer 2","Prvi Kirchhoffov zakon - Primjer 3","Drugi Kirchhoffov zakon - Primjer 1","Drugi Kirchhoffov zakon - Primjer 2","Drugi Kirchhoffov zakon - Primjer 3"};  
+		String [] listaPrimjera = {"Ohmov zakon", "Prvi Kirchhoffov zakon","Drugi Kirchhoffov zakon","Mješani spoj otpornika - Primjer 1","Mješani spoj otpornika - Primjer 2","Mješani spoj otpornika - Primjer 3","Mješani spoj otpornika - Primjer 4"};  
 		primjeri = new JComboBox<String>(listaPrimjera);
 		primjeri.setSelectedIndex(0);
 		primjeri.addActionListener(this);
-		JButton izv = new JButton("Izvor");
-		JButton amp = new JButton("Ampermetar");
-		JButton vol = new JButton("Voltmetar");
-		JButton vod = new JButton("Vod");
-		JButton save = new JButton("Spremi");
-		JButton load = new JButton("Ucitaj");
-		JButton desno_gore = new JButton("Vod desno-gore");
-		JButton dolje_desno = new JButton("Vod desno-dolje");
-		JButton lijevo_dolje = new JButton("Vod lijevo-dolje");
-		JButton lijevo_gore = new JButton("Vod lijevo-gore");
-		JButton Tdesno = new JButton("Vod T-desno");
-		JButton Tlijevo = new JButton("Vod T-lijevo");
-		JButton Tgore = new JButton("Vod T-gore");
-		JButton Tdolje = new JButton("Vod T-dolje");
-		JButton delete = new JButton("Obrisi");
+		izv = new JButton("Izvor");
+		amp = new JButton("Ampermetar");
+		vol = new JButton("Voltmetar");
+		vod = new JButton("Vod");
+		save = new JButton("Spremi");
+		load = new JButton("Ucitaj");
+		desno_gore = new JButton("Vod desno-gore");
+		dolje_desno = new JButton("Vod desno-dolje");
+		lijevo_dolje = new JButton("Vod lijevo-dolje");
+		lijevo_gore = new JButton("Vod lijevo-gore");
+		Tdesno = new JButton("Vod T-desno");
+		Tlijevo = new JButton("Vod T-lijevo");
+		Tgore = new JButton("Vod T-gore");
+		Tdolje = new JButton("Vod T-dolje");
+		delete = new JButton("Obrisi");
 		
 		
 		
 		
-		JButton temp = new JButton("Test");
+		temp = new JButton("Otpornik");
 		temp.setMaximumSize(maxSize);
 		temp.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				addRes();
 			}
 		});
-		add(temp);
+		
 		
 		
 		izv.setMaximumSize(maxSize);
@@ -199,21 +215,7 @@ public class meniView extends JPanel implements ActionListener {
 		});
 		
 		add(primjeri);
-		add(save);
-		add(load);
-		add(izv);
-		add(vod);
-		add(vol);
-		add(amp);
-		add(desno_gore);
-		add(dolje_desno);
-		add(lijevo_dolje);
-		add(lijevo_gore);
-		add(Tgore);
-		add(Tdolje);
-		add(Tlijevo);
-		add(Tdesno);
-		add(delete);
+		
 		
 		
 		
@@ -325,8 +327,51 @@ public class meniView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		int index = primjeri.getSelectedIndex();
+		
+		if(index >2){
+			appView.slide = false;
+			add(temp);
+			add(save);
+			add(load);
+			add(izv);
+			add(vod);
+			add(vol);
+			add(amp);
+			add(desno_gore);
+			add(dolje_desno);
+			add(lijevo_dolje);
+			add(lijevo_gore);
+			add(Tgore);
+			add(Tdolje);
+			add(Tlijevo);
+			add(Tdesno);
+			add(delete);
+			repaint();
+		}
+		else{
+			appView.slide = true;
+			remove(temp);
+			remove(save);
+			remove(load);
+			remove(izv);
+			remove(vod);
+			remove(vol);
+			remove(amp);
+			remove(desno_gore);
+			remove(dolje_desno);
+			remove(lijevo_gore);
+			remove(lijevo_dolje);
+			remove(Tgore);
+			remove(Tdolje);
+			remove(Tlijevo);
+			remove(Tdesno);
+			remove(delete);
+			repaint();
+			
+		}
 		appView.changeLayout();
-		appView.loadList(primjeri.getSelectedIndex());
+		appView.loadList(index);
 		repaint();
 		
 	}

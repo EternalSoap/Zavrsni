@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JSlider;
 
 public class Izvor implements Element{
 	
@@ -16,6 +17,7 @@ public class Izvor implements Element{
 	transient BufferedImage slika;
 	Boolean paint;
 	String napon;
+	
 	
 	public Izvor(String n){
 		inverted = false;

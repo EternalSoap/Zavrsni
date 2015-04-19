@@ -41,7 +41,6 @@ public class radView extends JPanel{
 		    public void run() {
 		        while (true) {
 		            repaint();
-		            spojeno();
 		            try {
 		                Thread.sleep(30);
 		            } catch (InterruptedException ignored) {
@@ -102,47 +101,7 @@ public class radView extends JPanel{
 		
 		 
 	}
-	public Boolean spojeno(){
-		Boolean s = true;
-		int i,j,izvorx,izvory;
-		i=j=izvorx=izvory=0;
-		Element[][] polje = new Element[8][7];
-		
-		for(Element e : appView.l){
-			if(e.ready()){
-			i = (int) ((e.getShape().getBounds2D().getX()-25)/100);
-			j = (int) ((e.getShape().getBounds2D().getY()-25)/100);
-			if(e instanceof Elementi.Izvor ){izvorx = i; izvory = j; }
-			polje[i][j] = e;
-			}
-			}
-		int counter =0;
-		int broj = appView.l.size();
-		for(int prvi =1; prvi<broj; prvi++){
-			for(int drugi = 0; drugi<broj; drugi++){
-				Element e1 = appView.l.get(prvi);
-				Element e2 = appView.l.get(drugi);
-				if(e1.ready() && e2.ready()) {
-					
-					int w = e2.getRotation()?0:110;
-					int h = e2.getRotation()?110:0;
-					if(e1.getShape().getBounds2D().contains(new Point((int) e2.getShape().getBounds2D().getX()+w,(int)e2.getShape().getBounds2D().getY()+h))){
-						System.out.println(prvi+" "+ drugi); counter++;}
-					//else System.out.println("Ne");
-				}	
-			}
-			if(counter!=broj/2) System.out.println("Krivo spojeno");
-			
-		}
-		
-			
-			
-		
-				
-				
-		return s;
-		
-	}
+
 	
 	
 }

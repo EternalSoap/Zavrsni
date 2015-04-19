@@ -22,6 +22,7 @@ public class appView extends JPanel implements Serializable{
 	static JFrame j = new JFrame("Simulacija Strujnog Kruga");
 	static JPanel container = new JPanel();
 	static Boolean del;
+	static Boolean slide = false;
 	public static void main(String[] args){
 		
 		SwingUtilities.invokeLater(new Runnable(){
@@ -50,7 +51,7 @@ public class appView extends JPanel implements Serializable{
 		container.add(view2);
 		j.getContentPane().add(container, BorderLayout.NORTH);
 		j.pack();
-		j.setSize(1200, 800);
+		j.setSize(1200, 768);
 		j.setVisible(true);
 		del = false;
 		
