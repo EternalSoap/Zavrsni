@@ -13,7 +13,7 @@ public class Izvor implements Element{
 	
 	Point a,b;
 	Boolean inverted;
-	private String imageName = "izvor.png";
+	private String imageName = "Izvor.png";
 	transient BufferedImage slika;
 	Boolean paint;
 	String napon;
