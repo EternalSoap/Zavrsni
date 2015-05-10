@@ -1,6 +1,7 @@
 package Grafika;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.BoxLayout;
@@ -23,6 +25,9 @@ public class appView extends JPanel implements Serializable{
 	static JPanel container = new JPanel();
 	static Boolean del;
 	static Boolean slide = false;
+	static meniView view1;
+	static splashScreen view2;
+	static Boolean layout = false;
 	public static void main(String[] args){
 		
 		SwingUtilities.invokeLater(new Runnable(){
@@ -43,9 +48,9 @@ public class appView extends JPanel implements Serializable{
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setResizable(false);
 		//j.setExtendedState(j.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		meniView view1 = new meniView();
+		view1 = new meniView();
 		//radView view2 = new radView();
-		splashScreen view2 = new splashScreen();
+		view2 = new splashScreen();
 		container.setLayout(new BoxLayout(container,BoxLayout.X_AXIS));
 		container.add(view1);
 		container.add(view2);
@@ -64,6 +69,7 @@ public class appView extends JPanel implements Serializable{
 	public static void dodajXY(int x, int y) {
 		for(Element i : l){
 			if(i instanceof Elementi.Otpornik && (i.ready()) &&i.ima(new Point(x,y))) i.updateValue(new unos(i.getValue(),"otpor").returnOtpor());
+			if(i instanceof Elementi.Izvor && (i.ready()) &&i.ima(new Point(x,y))) i.updateValue(new unos(i.getValue(),"struja").returnVoltage());
 			if(!i.ready()) continue;
 			if(i.ima(new Point(x,y))) return;
 		}
@@ -115,11 +121,10 @@ public class appView extends JPanel implements Serializable{
 	}
 	
 	public static void changeLayout(){
-		j.getContentPane().remove(container);
-		JPanel container = new JPanel();
-		meniView v1 = new meniView();
+		if(layout) return;
+		layout = true;
+		container.remove(view2);
 		radView v2 = new radView();
-		container.add(v1);
 		container.add(v2);
 		j.getContentPane().add(container, BorderLayout.NORTH);
 		j.revalidate();

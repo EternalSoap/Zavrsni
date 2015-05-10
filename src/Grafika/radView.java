@@ -96,7 +96,7 @@ public class radView extends JPanel{
 						
 					}
 		}
-			
+			if(p.getValue() != null) g2d.drawString(p.getValue(), (int)p.getShape().getBounds2D().getX(), (int)p.getShape().getBounds2D().getY());
 		}
 		
 		 

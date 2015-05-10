@@ -86,5 +86,6 @@ public class unos extends JFrame {
 		return Long.toString(otpor);
 		
 	}
-
+	
+	
 }

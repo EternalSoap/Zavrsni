@@ -13,18 +13,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Elementi.Ampermetar;
 import Elementi.Desno_gore;
 import Elementi.Dolje_desno;
 import Elementi.Izvor;
+import Elementi.Krizni;
 import Elementi.Lijevo_dolje;
 import Elementi.Lijevo_gore;
 import Elementi.Linija;
@@ -44,7 +49,6 @@ public class meniView extends JPanel implements ActionListener {
 	JButton vol;
 	JButton vod;
 	JButton save;
-	JButton load;
 	JButton desno_gore ;
 	JButton dolje_desno;
 	JButton lijevo_dolje;
@@ -54,6 +58,8 @@ public class meniView extends JPanel implements ActionListener {
 	JButton Tgore;
 	JButton Tdolje;
 	JButton delete;
+	JButton krizni;
+	ArrayList<JSlider> sliders;
 	public meniView(){
 		
 		this.setMaximumSize(getPreferredSize());
@@ -70,7 +76,6 @@ public class meniView extends JPanel implements ActionListener {
 		vol = new JButton("Voltmetar");
 		vod = new JButton("Vod");
 		save = new JButton("Spremi");
-		load = new JButton("Ucitaj");
 		desno_gore = new JButton("Vod desno-gore");
 		dolje_desno = new JButton("Vod desno-dolje");
 		lijevo_dolje = new JButton("Vod lijevo-dolje");
@@ -79,7 +84,13 @@ public class meniView extends JPanel implements ActionListener {
 		Tlijevo = new JButton("Vod T-lijevo");
 		Tgore = new JButton("Vod T-gore");
 		Tdolje = new JButton("Vod T-dolje");
-		delete = new JButton("Obrisi");
+		delete = new JButton("Obriši");
+		krizni = new JButton("Vod križni");
+		sliders = new ArrayList<JSlider>();
+		for(int i=0;i<6;i++)sliders.add(new JSlider());
+		
+
+			
 		
 		
 		
@@ -95,7 +106,7 @@ public class meniView extends JPanel implements ActionListener {
 		
 		
 		izv.setMaximumSize(maxSize);
-		load.setMaximumSize(maxSize);
+		
 		save.setMaximumSize(maxSize);
 		amp.setMaximumSize(maxSize);
 		vol.setMaximumSize(maxSize);
@@ -110,15 +121,9 @@ public class meniView extends JPanel implements ActionListener {
 		Tdolje.setMaximumSize(maxSize);
 		primjeri.setMaximumSize(maxSize);
 		delete.setMaximumSize(maxSize);
+		krizni.setMaximumSize(maxSize);
 		
-		load.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-					appView.loadList(primjeri.getSelectedIndex());
-					repaint();
-				
-			}	
-			
-		});
+	
 		
 		save.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
@@ -214,6 +219,12 @@ public class meniView extends JPanel implements ActionListener {
 			}
 		});
 		
+		krizni.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				addKrizni();
+			}
+		});
+		
 		add(primjeri);
 		
 		
@@ -221,6 +232,15 @@ public class meniView extends JPanel implements ActionListener {
 		
 	}
 	
+
+
+
+	protected void addKrizni() {
+		appView.dodajEl(new Krizni());
+		
+	}
+
+
 
 
 	protected void delete() {
@@ -328,53 +348,67 @@ public class meniView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		int index = primjeri.getSelectedIndex();
-		
-		if(index >2){
-			appView.slide = false;
-			add(temp);
-			add(save);
-			add(load);
-			add(izv);
-			add(vod);
-			add(vol);
-			add(amp);
-			add(desno_gore);
-			add(dolje_desno);
-			add(lijevo_dolje);
-			add(lijevo_gore);
-			add(Tgore);
-			add(Tdolje);
-			add(Tlijevo);
-			add(Tdesno);
-			add(delete);
-			repaint();
-		}
-		else{
-			appView.slide = true;
-			remove(temp);
-			remove(save);
-			remove(load);
-			remove(izv);
-			remove(vod);
-			remove(vol);
-			remove(amp);
-			remove(desno_gore);
-			remove(dolje_desno);
-			remove(lijevo_gore);
-			remove(lijevo_dolje);
-			remove(Tgore);
-			remove(Tdolje);
-			remove(Tlijevo);
-			remove(Tdesno);
-			remove(delete);
-			repaint();
-			
+		switch(index){
+		case 0: addSliders(2); repaint(); break;
+		case 1: addSliders(5); repaint(); break;
+		case 2: addSliders(5); repaint();break;
+		case 3: 
+		case 4: 
+		case 5: 
+		case 6: addButtons(); repaint();break;
 		}
 		appView.changeLayout();
 		appView.loadList(index);
-		repaint();
+		revalidate();
 		
 	}
+
+
+
+	private void addButtons() {
+		for(JSlider s : sliders) remove(s);
+		add(izv);
+		add(amp);
+		add(vol);
+		add(vod);
+		add(desno_gore);
+		add(dolje_desno);
+		add(lijevo_gore);
+		add(Tdesno);
+		add(Tlijevo);
+		add(Tgore);
+		add(Tdolje);
+		add(krizni);
+		add(delete);
+		add(save);
+		
+	}
+
+
+
+	private void addSliders(int i) {
+		for(JSlider rs : sliders) remove(rs);
+		
+		remove(izv);
+		remove(amp);
+		remove(vol);
+		remove(vod);
+		remove(desno_gore);
+		remove(dolje_desno);
+		remove(lijevo_gore);
+		remove(Tdesno);
+		remove(Tlijevo);
+		remove(Tgore);
+		remove(Tdolje);
+		remove(delete);
+		remove(save);
+		remove(krizni);
+		for(JSlider s : sliders)
+			if(i-->0)
+			add(s);
+		
+	}
+	
 	
 }
 
