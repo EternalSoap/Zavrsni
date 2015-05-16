@@ -78,7 +78,7 @@ public class Otpornik implements Element{
 	}
 	
 	public void updateValue(String value){
-		this.otpor = otpor;
+		this.otpor = value;
 	}
 
 	@Override

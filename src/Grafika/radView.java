@@ -84,7 +84,7 @@ public class radView extends JPanel{
 		Graphics2D g2d = (Graphics2D)g;
 		for(Element p : appView.l){
 			if(p.getImage()!=null){
-				if(p.ready()) 
+				if(p.ready()){ 
 					if(p.getRotation()) {
 						
 						AffineTransform r = AffineTransform.getRotateInstance(Math.toRadians(90), p.getImage().getWidth()/2, p.getImage().getHeight()/2);
@@ -96,8 +96,8 @@ public class radView extends JPanel{
 						
 					}
 		}
-			if(p.getValue() != null) g2d.drawString(p.getValue(), (int)p.getShape().getBounds2D().getX(), (int)p.getShape().getBounds2D().getY());
-		}
+			if(p.getValue() != null && (p instanceof Elementi.Izvor || p instanceof Elementi.Otpornik)) g2d.drawString(p.getValue(), (int)p.getShape().getBounds2D().getX(), (int)p.getShape().getBounds2D().getY());
+		}}
 		
 		 
 	}

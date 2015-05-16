@@ -28,6 +28,7 @@ import javax.swing.event.ChangeListener;
 import Elementi.Ampermetar;
 import Elementi.Desno_gore;
 import Elementi.Dolje_desno;
+import Elementi.Element;
 import Elementi.Izvor;
 import Elementi.Krizni;
 import Elementi.Lijevo_dolje;
@@ -67,7 +68,7 @@ public class meniView extends JPanel implements ActionListener {
 		setLayout(new GridLayout(20,1,40,5));
 		Dimension maxSize = new Dimension(100,40);
 		
-		String [] listaPrimjera = {"Ohmov zakon", "Prvi Kirchhoffov zakon","Drugi Kirchhoffov zakon","Mješani spoj otpornika - Primjer 1","Mješani spoj otpornika - Primjer 2","Mješani spoj otpornika - Primjer 3","Mješani spoj otpornika - Primjer 4"};  
+		String [] listaPrimjera = {"Ohmov zakon", "Prvi Kirchhoffov zakon","Drugi Kirchhoffov zakon","Mješani spoj otpornika - Primjer 1","Mješani spoj otpornika - Primjer 2","Mješani spoj otpornika - Primjer 3","Mješani spoj otpornika - Primjer 4","Mješani spoj otpornika - Primjer 5"};  
 		primjeri = new JComboBox<String>(listaPrimjera);
 		primjeri.setSelectedIndex(0);
 		primjeri.addActionListener(this);
@@ -87,7 +88,8 @@ public class meniView extends JPanel implements ActionListener {
 		delete = new JButton("Obriši");
 		krizni = new JButton("Vod križni");
 		sliders = new ArrayList<JSlider>();
-		for(int i=0;i<6;i++)sliders.add(new JSlider());
+		for(int i=0;i<6;i++){sliders.add(new JSlider());  } 
+		
 		
 
 			
@@ -348,25 +350,25 @@ public class meniView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		int index = primjeri.getSelectedIndex();
-		switch(index){
-		case 0: addSliders(2); repaint(); break;
-		case 1: addSliders(5); repaint(); break;
-		case 2: addSliders(5); repaint();break;
-		case 3: 
-		case 4: 
-		case 5: 
-		case 6: addButtons(); repaint();break;
-		}
 		appView.changeLayout();
 		appView.loadList(index);
-		revalidate();
+		addButtons(); repaint();
+		/*switch(index){
+		case 0: addSliders(3); repaint(); break;
+		case 1: addSliders(5); repaint(); break;
+		case 2: addSliders(5); repaint();break;
+		default: addButtons(); repaint(); break;
+		}*/
 		
+		revalidate();
+
 	}
 
 
 
 	private void addButtons() {
 		for(JSlider s : sliders) remove(s);
+		add(temp);
 		add(izv);
 		add(amp);
 		add(vol);
@@ -374,6 +376,7 @@ public class meniView extends JPanel implements ActionListener {
 		add(desno_gore);
 		add(dolje_desno);
 		add(lijevo_gore);
+		add(lijevo_dolje);
 		add(Tdesno);
 		add(Tlijevo);
 		add(Tgore);
@@ -388,7 +391,7 @@ public class meniView extends JPanel implements ActionListener {
 
 	private void addSliders(int i) {
 		for(JSlider rs : sliders) remove(rs);
-		
+		remove (temp);
 		remove(izv);
 		remove(amp);
 		remove(vol);
@@ -396,6 +399,7 @@ public class meniView extends JPanel implements ActionListener {
 		remove(desno_gore);
 		remove(dolje_desno);
 		remove(lijevo_gore);
+		remove(lijevo_dolje);
 		remove(Tdesno);
 		remove(Tlijevo);
 		remove(Tgore);
@@ -407,6 +411,55 @@ public class meniView extends JPanel implements ActionListener {
 			if(i-->0)
 			add(s);
 		
+		//experimental
+		ArrayList<Element> changable = new ArrayList<Element>();
+		for(Element el : appView.l)
+			if(el instanceof Elementi.Izvor || el instanceof Elementi.Otpornik)
+				changable.add(el);		
+	
+	for(int l=0;l<changable.size();l++){
+		setListener(sliders.get(l),changable.get(l));
+		
+	}
+		
+	}
+
+
+
+
+	private void setListener(JSlider slide, Element el) {
+		slide.setMaximum(350);
+		try{
+		slide.setValue(Integer.parseInt(el.getValue()));}catch(NumberFormatException e){e.printStackTrace();}
+		if(el instanceof Elementi.Izvor){
+			slide.addChangeListener(new ChangeListener(){
+
+				@Override
+				public void stateChanged(ChangeEvent event) {
+					JSlider source = (JSlider) event.getSource();
+					if(!source.getValueIsAdjusting()){
+						el.updateValue(Integer.toString(source.getValue()));
+					}
+					
+				}
+				
+			});
+		}
+		else{
+			slide.addChangeListener(new ChangeListener(){
+
+				@Override
+				public void stateChanged(ChangeEvent event) {
+					JSlider source = (JSlider) event.getSource();
+					if(!source.getValueIsAdjusting()){
+						el.updateValue(Integer.toString(source.getValue()));
+					}
+					
+				}
+				
+			});
+		}
+	
 	}
 	
 	

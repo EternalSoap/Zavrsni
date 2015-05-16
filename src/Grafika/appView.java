@@ -69,7 +69,7 @@ public class appView extends JPanel implements Serializable{
 	public static void dodajXY(int x, int y) {
 		for(Element i : l){
 			if(i instanceof Elementi.Otpornik && (i.ready()) &&i.ima(new Point(x,y))) i.updateValue(new unos(i.getValue(),"otpor").returnOtpor());
-			if(i instanceof Elementi.Izvor && (i.ready()) &&i.ima(new Point(x,y))) i.updateValue(new unos(i.getValue(),"struja").returnVoltage());
+			else if(i instanceof Elementi.Izvor && (i.ready()) &&i.ima(new Point(x,y))) i.updateValue(new unos(i.getValue(),"struja").returnVoltage());
 			if(!i.ready()) continue;
 			if(i.ima(new Point(x,y))) return;
 		}
