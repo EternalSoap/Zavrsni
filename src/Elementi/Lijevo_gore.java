@@ -81,7 +81,6 @@ public class Lijevo_gore implements Element {
 	public void refresh() {
 		try {
 			slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
-			System.out.println(slika);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
