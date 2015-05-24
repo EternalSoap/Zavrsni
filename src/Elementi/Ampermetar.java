@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -83,7 +82,7 @@ public class Ampermetar implements Element {
 	public void refresh() {
 		try {
 			slika = ImageIO.read(getClass().getClassLoader().getResource(imageName));
-			System.out.println(slika);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -19,10 +19,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Elementi.Ampermetar;
 import Elementi.Element;
 import Elementi.Linker;
-import Elementi.Otpornik;
 
 public class radView extends JPanel{
 	Font tf = new Font("Arial", Font.BOLD, 15);
@@ -151,10 +149,13 @@ public class radView extends JPanel{
 					}
 				}
 				
+				int i=0;
+				int j=0;
 				for(String f : formula ){
+					g2d.setFont(tf2);
 					switch(meniView.getIndex()){
-						case 0: g2d.setFont(tf2);g2d.drawString(f, 550, 400); break;
-						case 1: break;
+						case 0: g2d.drawString(f, 550, 400); break;
+						case 1: g2d.drawString(f, i+100, j+75);i+=400; if(i >= 125+300){i=0; j = 600;} break;
 						case 2: break;
 						
 						

@@ -7,17 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.Console;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -65,7 +59,7 @@ public class meniView extends JPanel implements ActionListener {
 		
 		this.setMaximumSize(getPreferredSize());
 		setBorder(new EmptyBorder(25,25,25,25));
-		setLayout(new GridLayout(20,1,40,5));
+		setLayout(new GridLayout(18,1,40,1));
 		Dimension maxSize = new Dimension(100,40);
 		
 		String [] listaPrimjera = {"Ohmov zakon", "Prvi Kirchhoffov zakon","Drugi Kirchhoffov zakon","Mješani spoj otpornika - Primjer 1","Mješani spoj otpornika - Primjer 2","Mješani spoj otpornika - Primjer 3","Mješani spoj otpornika - Primjer 4","Mješani spoj otpornika - Primjer 5"};  
@@ -88,10 +82,17 @@ public class meniView extends JPanel implements ActionListener {
 		delete = new JButton("Obriši");
 		krizni = new JButton("Vod križni");
 		sliders = new ArrayList<JSlider>();
-		for(int i=0;i<6;i++){sliders.add(new JSlider());  } 
+		for(int i=0;i<6;i++){
+			JSlider a  = new JSlider();
+			a.setMajorTickSpacing(100);
+			a.setMinorTickSpacing(10);
+			a.setPaintTicks(true);
+			a.setPaintLabels(true);
+			sliders.add(a);
+		} 
 		
 		
-
+	
 			
 		
 		
@@ -227,10 +228,10 @@ public class meniView extends JPanel implements ActionListener {
 			}
 		});
 		
+		
+		
+		
 		add(primjeri);
-		
-		
-		
 		
 	}
 	
@@ -349,6 +350,7 @@ public class meniView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		sliders.get(0).setName("Napon"); sliders.get(1).setName("Otpor1"); sliders.get(2).setName("Otpor2"); sliders.get(3).setName("Otpor3"); sliders.get(4).setName("Otpor4");
 		int index = primjeri.getSelectedIndex();
 		appView.changeLayout();
 		appView.loadList(index);
@@ -367,7 +369,8 @@ public class meniView extends JPanel implements ActionListener {
 
 
 	private void addButtons() {
-		for(JSlider s : sliders) remove(s);
+		this.removeAll();
+		add(primjeri);
 		add(temp);
 		add(izv);
 		add(amp);
@@ -390,28 +393,20 @@ public class meniView extends JPanel implements ActionListener {
 
 
 	private void addSliders(int i) {
-		for(JSlider rs : sliders) remove(rs);
-		remove (temp);
-		remove(izv);
-		remove(amp);
-		remove(vol);
-		remove(vod);
-		remove(desno_gore);
-		remove(dolje_desno);
-		remove(lijevo_gore);
-		remove(lijevo_dolje);
-		remove(Tdesno);
-		remove(Tlijevo);
-		remove(Tgore);
-		remove(Tdolje);
-		remove(delete);
-		remove(save);
-		remove(krizni);
-		for(JSlider s : sliders)
-			if(i-->0)
-			add(s);
+		this.removeAll();
+		add(primjeri);
 		
-		//experimental
+		for(JSlider s : sliders)
+			if(i-->0){
+			s.setPaintTicks(true);
+			s.setPaintLabels(true);
+			
+			add(Box.createRigidArea(new Dimension(5,0)));
+			add(new JTextField(s.getName()));
+			add(s);
+			
+			}
+		
 		ArrayList<Element> changable = new ArrayList<Element>();
 		for(Element el : appView.l)
 			if(el instanceof Elementi.Izvor || el instanceof Elementi.Otpornik)
