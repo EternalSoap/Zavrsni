@@ -23,7 +23,7 @@ public class splashScreen extends JPanel{
 		this.setSize(new Dimension(875,800));
 		setBorder(BorderFactory.createMatteBorder(0,1, 0, 0, Color.black));
 		setVisible(true);
-		System.out.println(this.getWidth());
+		
 	}
 	
 	public Dimension getPrefferedSize(){

@@ -96,7 +96,6 @@ public class unos extends JFrame {
 		case 0: break;
 		case 1: otpor*=Math.pow(10.00,3.00);break;
 		}
-		System.out.println(otpor);
 		setVisible(false);
 		dispose();
 		return Long.toString(otpor);
