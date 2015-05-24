@@ -43,7 +43,7 @@ import Elementi.Voltmetar;
 
 
 public class meniView extends JPanel implements ActionListener {
-	JComboBox<String> primjeri;
+	static JComboBox<String> primjeri;
 	JButton temp;
 	JButton izv;
 	JButton amp;
@@ -353,12 +353,12 @@ public class meniView extends JPanel implements ActionListener {
 		appView.changeLayout();
 		appView.loadList(index);
 		addButtons(); repaint();
-		/*switch(index){
-		case 0: addSliders(3); repaint(); break;
-		case 1: addSliders(5); repaint(); break;
+		switch(index){
+		case 0: addSliders(2); repaint(); break;
+		case 1: addSliders(4); repaint(); break;
 		case 2: addSliders(5); repaint();break;
 		default: addButtons(); repaint(); break;
-		}*/
+		}
 		
 		revalidate();
 
@@ -462,6 +462,9 @@ public class meniView extends JPanel implements ActionListener {
 	
 	}
 	
-	
+	public static int getIndex(){
+		
+		return primjeri.getSelectedIndex();
+	}
 }
 

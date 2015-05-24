@@ -18,9 +18,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import Elementi.Element;
+import Elementi.Linker;
 
 public class appView extends JPanel implements Serializable{
 	static CopyOnWriteArrayList<Element> l = new CopyOnWriteArrayList<Element>();
+	static CopyOnWriteArrayList<Linker> links = new CopyOnWriteArrayList<Linker>();
 	static JFrame j = new JFrame("Simulacija Strujnog Kruga");
 	static JPanel container = new JPanel();
 	static Boolean del;
