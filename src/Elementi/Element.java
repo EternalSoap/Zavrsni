@@ -18,11 +18,7 @@ public interface Element extends Serializable{
 	
 	boolean ima(Point point);
 
-	String getValue(int i);
-	
 	String getValue();
-	
-	void updateValue(String value, int i);
 	
 	void updateValue(String value);
 	

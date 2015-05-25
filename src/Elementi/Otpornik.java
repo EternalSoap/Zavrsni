@@ -6,7 +6,6 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class Otpornik implements Element{
@@ -84,18 +83,6 @@ public class Otpornik implements Element{
 	@Override
 	public boolean getRotation() {
 		return this.inverted;
-	}
-
-	@Override
-	public String getValue(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateValue(String value, int i) {
-		// TODO Auto-generated method stub
-		
 	};
 
 	
