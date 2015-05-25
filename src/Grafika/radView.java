@@ -207,12 +207,12 @@ public class radView extends JPanel{
 			
 			break;
 		case 5: appView.links.add(new Linker(new Point(2*100+25,5*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25), new Point(2*100+25,2*100+25), new Point(2*100+25,3*100+25)}, {new Point(6*100+25,1*100+25), new Point(6*100+25,3*100+25)} }, new int []{1,1}));
-				appView.links.add(new Linker(new Point(1*100+25,1*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25)}}, new int []{0}));
-				appView.links.add(new Linker(new Point(1*100+25,2*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,2*100+25)}}, new int []{0}));
-				appView.links.add(new Linker(new Point(1*100+25,3*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,1*100+25),new Point[]{new Point(1*100+25,4*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,2*100+25),new Point[]{new Point(1*100+25,4*100+25)}, new Point [][]{{new Point(2*100+25,2*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,3*100+25),new Point[]{new Point(1*100+25,4*100+25)}, new Point [][]{{new Point(2*100+25,3*100+25)}}, new int []{0}));
 				appView.links.add(new Linker(new Point(1*100+25,4*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25), new Point(2*100+25,2*100+25), new Point(2*100+25,3*100+25)}}, new int []{1}));
-				appView.links.add(new Linker(new Point(5*100+25,1*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,1*100+25)}}, new int []{0}));
-				appView.links.add(new Linker(new Point(5*100+25,3*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(5*100+25,1*100+25),new Point[]{new Point(5*100+25,4*100+25)}, new Point [][]{{new Point(6*100+25,1*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(5*100+25,3*100+25),new Point[]{new Point(5*100+25,4*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25)}}, new int []{0}));
 				appView.links.add(new Linker(new Point(5*100+25,4*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,1*100+25), new Point(6*100+25,3*100+25)}}, new int []{1}));
 				
 		
@@ -326,9 +326,7 @@ public class radView extends JPanel{
 			}
 			uR = uS + uP;
 		}
-		for(Linker l : appView.links){
-			if(l.zero) return new String[]{"Greška",Float.toString(uV),Float.toString(uR)};
-		}
+		if(uR==0) return new String[]{"Greska", Float.toString(round(uV,2)), Float.toString(round(uR,2))};
 		return new String[]{Float.toString(round(uV*uR,2)),Float.toString(uV), Float.toString(round(uR,2))};
 		
 	}
