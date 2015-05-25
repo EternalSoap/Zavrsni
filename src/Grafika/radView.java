@@ -26,6 +26,7 @@ public class radView extends JPanel{
 	Font tf = new Font("Arial", Font.BOLD, 15);
 	Font tf2 = new Font("Arial",Font.BOLD,20);
 	ArrayList<String> formula;
+	ArrayList<String> resVals = new ArrayList<String>();
 	public radView(){
 		setBorder(new EmptyBorder(25,25,25,25));
 		setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.black));
@@ -153,10 +154,12 @@ public class radView extends JPanel{
 				int j=0;
 				for(String f : formula ){
 					g2d.setFont(tf2);
+					Color dank = new Color(8,117,35);
+					g2d.setColor(dank);
 					switch(meniView.getIndex()){
 						case 0: g2d.drawString(f, 550, 400); break;
-						case 1: g2d.drawString(f, i+100, j+75);i+=400; if(i >= 125+300){i=0; j = 600;} break;
-						case 2: break;
+						case 1: g2d.drawString(f, i+200, j+75); j+= (j>500)? 50: 550;break;
+						case 2: g2d.drawString(f, i+150, j+275); j+=100;break;
 						
 						
 					}
@@ -174,45 +177,107 @@ public class radView extends JPanel{
 		formula = new ArrayList<String>();
 		appView.links.clear();
 		switch(meniView.getIndex()){
-		case 0: appView.links.add(new Linker(new Point(4*100+25,3*100+25), new Point[]{new Point(3*100+25,4*100+25)}, new Point[]{new Point(3*100+25,2*100+25)}, 0, false)); break;
-		case 1: appView.links.add(new Linker(new Point(1*100+25,1*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[]{new Point(2*100+25,3*100+25), new Point(4*100+25,3*100+25), new Point(6*100+25,3*100+25)},1,false));
-				appView.links.add(new Linker(new Point(2*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[]{new Point(2*100+25,3*100+25)}, 0, false));
-				appView.links.add(new Linker(new Point(4*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[]{new Point(4*100+25,3*100+25)}, 0, false));
-				appView.links.add(new Linker(new Point(6*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[]{new Point(6*100+25,3*100+25)}, 0, false));
+		case 0: appView.links.add(new Linker(new Point(4*100+25,3*100+25), new Point[]{new Point(3*100+25,4*100+25)}, new Point[][]{{new Point(3*100+25,2*100+25)}}, new int[]{0})); break;
+		case 1: appView.links.add(new Linker(new Point(1*100+25,1*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,3*100+25), new Point(4*100+25,3*100+25), new Point(6*100+25,3*100+25)}}, new int[]{1}));
+				appView.links.add(new Linker(new Point(2*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,3*100+25)}}, new int[]{0}));
+				appView.links.add(new Linker(new Point(4*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[][]{{new Point(4*100+25,3*100+25)}}, new int[]{0}));
+				appView.links.add(new Linker(new Point(6*100+25,2*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[][]{{new Point(6*100+25,3*100+25)}}, new int[]{0}));
 		break;
-		case 2: appView.links.add(new Linker(new Point(7*100+25,3*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[]{new Point(2*100+25,1*100+25), new Point(5*100+25,1*100+25), new Point(2*100+25,5*100+25), new Point(5*100+25,5*100+25)},0, false));
-				appView.links.add(new Linker(new Point(2*100+25,0*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[]{new Point(2*100+25,1*100+25)}, 0, true));
-				appView.links.add(new Linker(new Point(5*100+25,0*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[]{new Point(2*100+25,1*100+25)}, 0, true));
-				appView.links.add(new Linker(new Point(2*100+25,6*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[]{new Point(2*100+25,5*100+25)}, 0, true));
-				appView.links.add(new Linker(new Point(5*100+25,6*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[]{new Point(5*100+25,5*100+25)}, 0, true));
+		case 2: appView.links.add(new Linker(new Point(7*100+25,3*100+25), new Point[]{new Point(0*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,1*100+25), new Point(5*100+25,1*100+25), new Point(2*100+25,5*100+25), new Point(5*100+25,5*100+25)}}, new int[]{0}));
+				appView.links.add(new Linker(new Point(2*100+25,0*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,1*100+25)}} , new int[]{0}));
+				appView.links.add(new Linker(new Point(5*100+25,0*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,1*100+25)}}, new int[]{0}));
+				appView.links.add(new Linker(new Point(2*100+25,6*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[][]{{new Point(2*100+25,5*100+25)}}, new int[]{0}));
+				appView.links.add(new Linker(new Point(5*100+25,6*100+25), new Point[]{new Point(7*100+25,3*100+25)}, new Point[][]{{new Point(5*100+25,5*100+25)}}, new int[]{0}));
 			
 			break;
-		case 3: break;
-		case 4: break;
-		case 5: break;
+		case 3: appView.links.add(new Linker(new Point(0*100+25,2*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(1*100+25,1*100+25)},{new Point(5*100+25,4*100+25), new Point(3*100+25,4*100+25)}}, new int []{0,1}));
+				appView.links.add(new Linker(new Point(1*100+25,0*100+25),new Point[]{new Point(0*100+25,2*100+25)}, new Point [][]{{new Point(1*100+25,1*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(3*100+25,2*100+25),new Point[]{new Point(1*100+25,0*100+25)}, new Point [][]{{new Point(3*100+25,4*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(5*100+25,2*100+25),new Point[]{new Point(1*100+25,0*100+25)}, new Point [][]{{new Point(5*100+25,4*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(4*100+25,4*100+25),new Point[]{new Point(3*100+25,2*100+25)}, new Point [][]{{new Point(3*100+25,4*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(6*100+25,4*100+25),new Point[]{new Point(5*100+25,2*100+25)}, new Point [][]{{new Point(5*100+25,4*100+25)}}, new int []{0}));
+				break;
+		case 4: appView.links.add(new Linker(new Point(1*100+25,1*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25), new Point(7*100+25,3*100+25)}, {new Point(2*100+25,1*100+25), new Point(3*100+25,3*100+25)}, {new Point(5*100+25,1*100+25), new Point(2*100+25,4*100+25)}}, new int []{1,1,0}));
+				appView.links.add(new Linker(new Point(1*100+25,4*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25), new Point(7*100+25,3*100+25)}, {new Point(2*100+25,1*100+25), new Point(3*100+25,3*100+25)}, {new Point(5*100+25,1*100+25), new Point(2*100+25,4*100+25)} }, new int []{1,1,0}));
+				appView.links.add(new Linker(new Point(3*100+25,2*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(3*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(6*100+25,2*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(7*100+25,2*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(7*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(4*100+25,1*100+25),new Point[]{new Point(0*100+25,3*100+25)}, new Point [][]{{new Point(5*100+25,1*100+25)}, {new Point(6*100+25,3*100+25)}, {new Point(7*100+25,3*100+25)} }, new int []{0,1,1}));
+		
+			
+			break;
+		case 5: appView.links.add(new Linker(new Point(2*100+25,5*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25), new Point(2*100+25,2*100+25), new Point(2*100+25,3*100+25)}, {new Point(6*100+25,1*100+25), new Point(6*100+25,3*100+25)} }, new int []{1,1}));
+				appView.links.add(new Linker(new Point(1*100+25,1*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,2*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,2*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,3*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(1*100+25,4*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(2*100+25,1*100+25), new Point(2*100+25,2*100+25), new Point(2*100+25,3*100+25)}}, new int []{1}));
+				appView.links.add(new Linker(new Point(5*100+25,1*100+25),new Point[]{new Point(4*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,1*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(5*100+25,3*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,3*100+25)}}, new int []{0}));
+				appView.links.add(new Linker(new Point(5*100+25,4*100+25),new Point[]{new Point(2*100+25,5*100+25)}, new Point [][]{{new Point(6*100+25,1*100+25), new Point(6*100+25,3*100+25)}}, new int []{1}));
+				
+		
+		break;
 		case 6: break;
 		case 7: break;
-		
 		}
-		String toPrint = "";
-	for(Linker link : appView.links){
+		ArrayList<String[]> container = new ArrayList<String[]>();
+		for(Linker link : appView.links){
 		for(Element out : appView.l){
 			if(out.ima(link.metar)){
 				if(out instanceof Elementi.Ampermetar){
 					String[] struja = struja(link);
-					
+					container.add(struja);
 					out.updateValue(struja[0]);
-					toPrint = "I ("+struja[0]+") = U (" +struja[1] + ") / R ("+struja[2] + ") ";
-					formula.add(toPrint);
 				}
 				if(out instanceof Elementi.Voltmetar){
 					String[] napon = napon(link);
+					container.add(napon);
 					out.updateValue(napon[0]);
-					toPrint = "I ("+napon[0]+") = U (" +napon[1] + ") / R ("+napon[2] + ") ";
-					formula.add(toPrint);
 				}
 			}
 		}
+	}
+	String toPrint;
+	switch(meniView.getIndex()){
+	case 0: toPrint = "I (" + container.get(0)[0] + ") = U (" +container.get(0)[1] + ") /R (" +container.get(0)[2] + ")"; formula.add(toPrint); break;
+	case 1: toPrint = "I (" + container.get(0)[0] + ") = I1 (" + container.get(1)[0] + ") + I2 (" + container.get(2)[0] + ") + I3 ("+ container.get(3)[0] + ") "; formula.add(toPrint); toPrint = "In = U / Rn , npr I1 ("+ container.get(1)[0] + ")  = U (" + container.get(1)[1] + ")/R1 (" + container.get(1)[2] +")"; formula.add(toPrint);
+		toPrint = "1/Ruk (" + container.get(0)[2] + ") = ";
+		resVals.clear();
+		int i=0;
+		for(Element el : appView.l){
+			if(el instanceof Elementi.Otpornik){
+				resVals.add(el.getValue());
+			}
+			
+		}
+		for(i=0;i<resVals.size();i++){
+			toPrint = toPrint + "1/R" + (i+1) + "("+ resVals.get(i) + ")";
+			if(i+1!=resVals.size()) toPrint += " + ";
+		}
+		formula.add(toPrint);
+	break;
+	case 2: 
+		toPrint = "U (" + container.get(0)[1] + ") = U1 (" + container.get(1)[0] + ") + U2 (" +container.get(2)[0] +") " + "+ U3 (" +container.get(3)[0] +") " + "+ U4 (" +container.get(4)[0] + ")";
+		formula.add(toPrint);
+		toPrint = "Un = I * Rn , npr. U1 (" + container.get(1)[0] + ") = I (" + container.get(1)[1] + ") * R1 (" + container.get(1)[2] + ") ";
+		formula.add(toPrint);
+		toPrint = "Ruk (" + container.get(0)[2] + ") = ";
+		resVals.clear();
+		i=0;
+		for(Element el : appView.l){
+			if(el instanceof Elementi.Otpornik){
+				resVals.add(el.getValue());
+			}
+			
+		}
+		for(i=0;i<resVals.size();i++){
+			toPrint = toPrint + "R" + (i+1) + " ("+ resVals.get(i) + ")";
+			if(i+1!=resVals.size()) toPrint += " + ";
+		}
+		formula.add(toPrint);
+		
+		break;
+	
 	}
 		
 	}
@@ -221,6 +286,10 @@ public class radView extends JPanel{
 	private String[] napon(Linker link) {
 		float uV = 0;
 		float uR = 0;
+		float uS = 0;
+		float uP = 0;
+		int i=0;
+		float ph = 0;
 		for(Point a : link.par1){
 			for(Element e : appView.l){
 				if(e.ima(a)){
@@ -231,23 +300,36 @@ public class radView extends JPanel{
 				}
 			}
 		}
-		for(Point b : link.par2){
-			for(Element e : appView.l){
-				if(e.ima(b)){
-					try{
-						uR = Float.parseFloat(e.getValue());
-						if(uR == 0){ link.zero = true; break;}
-					}catch(NumberFormatException err){err.printStackTrace();}
-					
+		for(Point[] b : link.par2){
+			ph = 0;
+			if(link.nodeconnection[i] == 0){
+				i++;
+				for(Point c : b){
+					for(Element e : appView.l){
+						if(e.ima(c)){
+							try{uS =uS + Float.parseFloat(e.getValue());}catch(NumberFormatException err){err.printStackTrace();}
+						}
+					}
 				}
-				
 			}
-			
+			else{
+				i++;
+				for(Point c : b){
+					for(Element e : appView.l){
+						if(e.ima(c)){
+							
+							try{float p= Float.parseFloat(e.getValue());  ph= ph+1/p;}catch(NumberFormatException err){err.printStackTrace();}
+						}
+					}
+				}
+				uP +=1/ph;
+			}
+			uR = uS + uP;
 		}
 		for(Linker l : appView.links){
 			if(l.zero) return new String[]{"Greška",Float.toString(uV),Float.toString(uR)};
 		}
-		return new String[]{Float.toString(round(uV*uR,2)),Float.toString(uV), Float.toString(uR)};
+		return new String[]{Float.toString(round(uV*uR,2)),Float.toString(uV), Float.toString(round(uR,2))};
 		
 	}
 
@@ -255,7 +337,6 @@ public class radView extends JPanel{
 	private String[] struja(Linker link) {
 		float uV = 0;
 		float uR = 0;
-		Boolean parallel = false;
 		for(Point a : link.par1){
 			for(Element e : appView.l){
 				if(e.ima(a)){
@@ -265,23 +346,42 @@ public class radView extends JPanel{
 				}
 			}
 		}
-			for(Point b : link.par2){
-				for(Element e : appView.l){
-					if(e.ima(b)){
-						float test = Float.parseFloat(e.getValue());
-						if(test==0){ link.zero = true; break;}
-						if(link.par == 0) try{ uR = uR + Float.parseFloat(e.getValue()); } catch(NumberFormatException err){err.printStackTrace();}
-						else try{ float r = Float.parseFloat(e.getValue());uR = uR + 1/r; parallel = true;} catch(NumberFormatException err){err.printStackTrace();}
+		int i=0;
+		float uS=0;
+		float uP=0;
+		float ph=0;
+		Boolean par = null;
+		for(Point[] b : link.par2){
+			ph = 0;
+			par = false;
+			if(link.nodeconnection[i] == 0){
+				i++;
+				for(Point c : b){
+					for(Element e : appView.l){
+						if(e.ima(c)){
+							try{uS =uS + Float.parseFloat(e.getValue());}catch(NumberFormatException err){err.printStackTrace();}
+						}
 					}
 				}
 			}
-			if(parallel)  uR = 1/uR;
-			for(Linker l : appView.links){
-				if(l.zero) return new String[]{"Greška",Float.toString(uV),Float.toString(uR)};
+			else{
+				i++;
+				for(Point c : b){
+					for(Element e : appView.l){
+						if(e.ima(c)){
+							par = true;
+							try{float p= Float.parseFloat(e.getValue());  ph= ph+1/p;}catch(NumberFormatException err){err.printStackTrace();}
+						}
+					}
+				}
+				uP += 1/ph;
 			}
 			
-			return new String[]{Float.toString(round(uV/uR,2)),Float.toString(uV),Float.toString(uR)};
+		}
 		
+		uR = par == true? uS+uP: uS+uP;
+		if(uR==0) return new String[]{"Greska", Float.toString(uV), Float.toString(uR)};
+		return new String[]{Float.toString(round(uV/uR,2)),Float.toString(uV), Float.toString(round(uR,2))};
 	}
 
 

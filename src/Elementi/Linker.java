@@ -4,18 +4,17 @@ import java.awt.Point;
 
 public class Linker {
 	public Point metar;
-	public Boolean type; //amp = 0, volt = 1
-	public int par; 	 // 1 = parallel , 0 = serial
 	public Point par1[]; //amp - voltage, volt - amp
-	public Point par2[]; //resistance
+	public Point par2[][]; //resistance
+	public int nodeconnection[]; //0 serial , 1 parallel (marks the connection type of a node
 	public Boolean zero = false;
 	
-	public Linker(Point m, Point p1[], Point p2[], int n, Boolean t){
+	public Linker(Point m, Point p1[], Point p2[][], int n[]){
 		metar = m;
 		par1 = p1;
 		par2 = p2;
-		par = n;
-		type = t;
+		nodeconnection = n;
+		
 	}
 	
 

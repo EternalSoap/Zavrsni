@@ -402,7 +402,9 @@ public class meniView extends JPanel implements ActionListener {
 			s.setPaintLabels(true);
 			
 			add(Box.createRigidArea(new Dimension(5,0)));
-			add(new JTextField(s.getName()));
+			JTextField jtf = new JTextField(s.getName());
+			jtf.setEditable(false);
+			add(jtf);
 			add(s);
 			
 			}

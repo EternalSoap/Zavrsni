@@ -96,10 +96,8 @@ public class appView extends JPanel implements Serializable{
 	@SuppressWarnings("unchecked")
 	public static void loadList(int index) {
 		String ime = "data"+index+".obj";
-		System.out.println(index);
 		try{
 			FileInputStream file = new FileInputStream(ime);
-			System.out.println(file.getChannel().size());
 			long duljina = file.getChannel().size();
 			if(duljina == 0){file.close(); return;}
 			ObjectInputStream ois = new ObjectInputStream(file);
