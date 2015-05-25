@@ -217,7 +217,7 @@ public class radView extends JPanel{
 				
 		
 		break;
-		case 6: break;
+		case 6: //isus break;
 		case 7: break;
 		}
 		ArrayList<String[]> container = new ArrayList<String[]>();
