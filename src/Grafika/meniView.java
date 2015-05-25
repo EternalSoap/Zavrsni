@@ -23,6 +23,7 @@ import Elementi.Ampermetar;
 import Elementi.Desno_gore;
 import Elementi.Dolje_desno;
 import Elementi.Element;
+import Elementi.Invisible;
 import Elementi.Izvor;
 import Elementi.Krizni;
 import Elementi.Lijevo_dolje;
@@ -54,6 +55,7 @@ public class meniView extends JPanel implements ActionListener {
 	JButton Tdolje;
 	JButton delete;
 	JButton krizni;
+	JButton invisible;
 	ArrayList<JSlider> sliders;
 	public meniView(){
 		
@@ -81,6 +83,7 @@ public class meniView extends JPanel implements ActionListener {
 		Tdolje = new JButton("Vod T-dolje");
 		delete = new JButton("Obriši");
 		krizni = new JButton("Vod križni");
+		invisible = new JButton("Ja sam nevidljiv");
 		sliders = new ArrayList<JSlider>();
 		for(int i=0;i<6;i++){
 			JSlider a  = new JSlider();
@@ -125,6 +128,7 @@ public class meniView extends JPanel implements ActionListener {
 		primjeri.setMaximumSize(maxSize);
 		delete.setMaximumSize(maxSize);
 		krizni.setMaximumSize(maxSize);
+		invisible.setMaximumSize(maxSize);
 		
 	
 		
@@ -228,6 +232,12 @@ public class meniView extends JPanel implements ActionListener {
 			}
 		});
 		
+		invisible.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				addInvisible();
+			}
+		});
+		
 		
 		
 		
@@ -235,6 +245,14 @@ public class meniView extends JPanel implements ActionListener {
 		
 	}
 	
+
+
+
+	protected void addInvisible() {
+		appView.dodajEl(new Invisible("0","0","0"));
+		
+	}
+
 
 
 
@@ -384,10 +402,10 @@ public class meniView extends JPanel implements ActionListener {
 		add(Tlijevo);
 		add(Tgore);
 		add(Tdolje);
-		add(krizni);
+		//add(krizni);
 		add(delete);
 		add(save);
-		
+		add(invisible);
 	}
 
 

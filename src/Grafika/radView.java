@@ -217,7 +217,7 @@ public class radView extends JPanel{
 				
 		
 		break;
-		case 6: //isus break;
+		case 6: break;
 		case 7: break;
 		}
 		ArrayList<String[]> container = new ArrayList<String[]>();
@@ -306,7 +306,7 @@ public class radView extends JPanel{
 				i++;
 				for(Point c : b){
 					for(Element e : appView.l){
-						if(e.ima(c)){
+						if(e.ima(c) && e.ready()){
 							try{uS =uS + Float.parseFloat(e.getValue());}catch(NumberFormatException err){err.printStackTrace();}
 						}
 					}
@@ -316,7 +316,7 @@ public class radView extends JPanel{
 				i++;
 				for(Point c : b){
 					for(Element e : appView.l){
-						if(e.ima(c)){
+						if(e.ima(c) && e.ready()){
 							
 							try{float p= Float.parseFloat(e.getValue());  ph= ph+1/p;}catch(NumberFormatException err){err.printStackTrace();}
 						}
@@ -337,7 +337,10 @@ public class radView extends JPanel{
 		float uR = 0;
 		for(Point a : link.par1){
 			for(Element e : appView.l){
-				if(e.ima(a)){
+				if(e.ima(a) && e.ready()){
+					if(e instanceof Elementi.Invisible){
+						uV = Float.parseFloat(e.getValue(1));
+					}
 					try{
 					uV = uV + Float.parseFloat(e.getValue());
 					}catch(NumberFormatException err){err.printStackTrace();}
@@ -366,7 +369,7 @@ public class radView extends JPanel{
 				i++;
 				for(Point c : b){
 					for(Element e : appView.l){
-						if(e.ima(c)){
+						if(e.ima(c) && e.ready()){
 							par = true;
 							try{float p= Float.parseFloat(e.getValue());  ph= ph+1/p;}catch(NumberFormatException err){err.printStackTrace();}
 						}

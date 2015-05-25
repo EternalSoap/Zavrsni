@@ -87,4 +87,16 @@ public class Desno_gore implements Element {
 		
 	}
 
+	@Override
+	public String getValue(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateValue(String value, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
