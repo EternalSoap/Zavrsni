@@ -5,6 +5,9 @@ import java.awt.Shape;
 import java.awt.image.BufferedImage;
 
 public class Invisible implements Element {
+	
+	
+	public String test(){return "da";}
 
 	@Override
 	public void updateXY(int x, int y) {

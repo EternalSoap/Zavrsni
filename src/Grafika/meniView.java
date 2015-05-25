@@ -23,6 +23,7 @@ import Elementi.Ampermetar;
 import Elementi.Desno_gore;
 import Elementi.Dolje_desno;
 import Elementi.Element;
+import Elementi.Invisible;
 import Elementi.Izvor;
 import Elementi.Krizni;
 import Elementi.Lijevo_dolje;
@@ -249,7 +250,6 @@ public class meniView extends JPanel implements ActionListener {
 	protected void delete() {
 		if(!appView.l.isEmpty())
 		appView.del = true;
-		
 	}
 
 
