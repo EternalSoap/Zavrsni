@@ -7,17 +7,17 @@ import java.awt.Graphics;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class splashScreen extends JPanel{
+public class splashScreen extends JPanel{ 
 
 	String ime = "Hrvoje Goldner";
-	String text = "Zavrsni rad";
+	String text = "Završni rad";
 	Font tf = new Font("Arial", Font.BOLD, 40);
 	Font ti = new Font("Arial", Font.BOLD,30);
+	
 	public splashScreen(){
 		this.setSize(new Dimension(875,800));
 		setBorder(BorderFactory.createMatteBorder(0,1, 0, 0, Color.black));
 		setVisible(true);
-		
 	}
 	
 	public Dimension getPrefferedSize(){

@@ -1,7 +1,6 @@
 package Grafika;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.BoxLayout;
@@ -30,6 +28,8 @@ public class appView extends JPanel implements Serializable{
 	static meniView view1;
 	static splashScreen view2;
 	static Boolean layout = false;
+	
+	
 	public static void main(String[] args){
 		
 		SwingUtilities.invokeLater(new Runnable(){
